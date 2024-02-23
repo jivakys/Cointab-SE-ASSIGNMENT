@@ -25,7 +25,7 @@ document.addEventListener("DOMContentLoaded", () => {
           const addBtn = userDiv.querySelector(".addBtn");
           const openBtn = userDiv.querySelector(".openBtn");
 
-          fetch(`http://localhost:3000/users/fetchUserByEmail/${user.email}`)
+          fetch(`http://localhost:3456/users/fetchUserByEmail/${user.email}`)
             .then((response) => response.json())
             .then((userData) => {
               if (userData) {
@@ -44,7 +44,7 @@ document.addEventListener("DOMContentLoaded", () => {
               city: user.address.city,
               company: user.company.name,
             };
-            fetch("http://localhost:3000/users/addUser", {
+            fetch("http://localhost:3456/users/addUser", {
               method: "POST",
               headers: {
                 "Content-Type": "application/json",
@@ -57,6 +57,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 }
                 addBtn.style.display = "none";
                 openBtn.style.display = "block";
+                openBtn.style.backgroundColor = "#a1cbf8";
               })
               .catch((error) => {
                 console.error("Error adding user:", error);

@@ -13,15 +13,14 @@ document.addEventListener("DOMContentLoaded", () => {
           const postDiv = document.createElement("div");
           postDiv.classList.add("post");
           postDiv.innerHTML = `
-                        <h3>Title: ${post.title}</h3>
-                        <p>${post.body}</p>
-                        <p><strong>User ID:</strong> ${post.userId}</p>
-                        <p><strong>Company:</strong> ${post.company}</p>
+                        <p><strong>User ID: </strong> ${post.userId}</p>
+                        <h3><strong>Title: </strong> ${post.title}</h3>
+                        <p><strong>Body: </strong> ${post.body}</p>
                     `;
           postContainer.appendChild(postDiv);
         });
 
-        downloadExcelBtn.style.display = "block";
+        // downloadExcelBtn.style.display = "block";
       } else {
         const noPostsMsg = document.createElement("p");
         noPostsMsg.textContent = "No posts found for this user.";
@@ -31,7 +30,7 @@ document.addEventListener("DOMContentLoaded", () => {
     .catch((error) => console.error("Error fetching posts:", error));
 
   bulkAddBtn.addEventListener("click", () => {
-    fetch(`http://localhost:3000/posts/bulkAddPosts/${userId}`, {
+    fetch(`http://localhost:3456/posts/bulkAddPosts/${userId}`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -50,7 +49,28 @@ document.addEventListener("DOMContentLoaded", () => {
       });
   });
 
-  downloadExcelBtn.addEventListener("click", () => {
-    window.location.href = `http://localhost:3000/posts/downloadPostsInExcel/${userId}`;
+  downloadExcelBtn.addEventListener("click", async () => {
+    try {
+      const postsData = await fetch(
+        `https://jsonplaceholder.typicode.com/posts?userId=${userId}`
+      );
+      const posts = await postsData.json();
+
+      if (!posts || posts.length === 0) {
+        alert("No posts found for download.");
+        return;
+      }
+
+      const workbook = XLSX.utils.book_new();
+      const worksheet = XLSX.utils.json_to_sheet(posts);
+      XLSX.utils.book_append_sheet(workbook, worksheet, "Posts");
+      const filename = `user_${userId}_posts.xlsx`;
+      XLSX.writeFile(workbook, filename);
+
+      alert("Excel file downloaded successfully.");
+    } catch (error) {
+      console.error("Error downloading Excel file:", error);
+      alert("Error downloading Excel file. Please try again.");
+    }
   });
 });

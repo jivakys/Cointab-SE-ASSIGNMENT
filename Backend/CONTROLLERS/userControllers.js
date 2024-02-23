@@ -12,6 +12,7 @@ module.exports = {
       if (existingUsers.length === 0) {
         await User.bulkCreate(users);
       }
+
       res.json({ users: existingUsers });
     } catch (error) {
       console.error("Error fetching users:", error);
@@ -23,6 +24,7 @@ module.exports = {
     try {
       const userId = req.params.id;
       const user = await User.findByPk(userId);
+
       res.json(user);
     } catch (error) {
       console.error("Error fetching user by ID:", error);
@@ -34,6 +36,7 @@ module.exports = {
     try {
       const userEmail = req.params.email;
       const user = await User.findOne({ where: { email: userEmail } });
+
       res.json(user);
     } catch (error) {
       console.error("Error fetching user by email:", error);
@@ -44,19 +47,25 @@ module.exports = {
   addUser: async (req, res) => {
     try {
       const user = req.body;
-      console.log(user);
       const existingUser = await User.findOne({ where: { email: user.email } });
       if (existingUser) {
         console.log("User already exists.");
-        res.json({ message: "User already exists.", showOpenButton: true });
-      } else {
-        await User.create(user);
-        res.json({ message: "User added successfully.", showOpenButton: true });
-        console.log("User added.");
+        return res.json({
+          message: "User already exists.",
+          showOpenButton: true,
+        });
       }
+
+      await User.create(user);
+
+      console.log("User added successfully.");
+      return res.json({
+        message: "User added successfully.",
+        showOpenButton: true,
+      });
     } catch (error) {
       console.error("Error adding user:", error);
-      res.status(500).json({ error: "Internal server error.", error });
+      return res.status(500).json({ error: "Internal server error." });
     }
   },
 };
