@@ -1,5 +1,5 @@
 const axios = require("axios");
-const Post = require("../models/post");
+const Post = require("../models/postModel");
 
 const fetchPosts = async (req, res) => {
   const userId = req.params.userId;

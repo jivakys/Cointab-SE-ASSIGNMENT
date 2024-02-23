@@ -1,46 +1,73 @@
-document.getElementById("allUsers").addEventListener("click", async () => {
-  const response = await fetch("/users");
-  const users = await response.json();
-  let html = "";
-  users.forEach((user) => {
-    html += `<div>
-                            <h2>${user.name}</h2>
-                            <p>Email: ${user.email}</p>
-                            <p>Phone: ${user.phone}</p>
-                            <p>Website: ${user.website}</p>
-                            <p>City: ${user.city}</p>
-                            <p>Company: ${user.company.name}</p>
-                            <button data-id="${user.id}" class="open">Open</button>
-                            <button data-id="${user.id}" style="display: none" class="add">Add</button>
-                        </div>`;
-  });
-  document.getElementById("users").innerHTML = html;
-  const addButtons = document.querySelectorAll(".add");
-  addButtons.forEach((button) => {
-    button.addEventListener("click", async () => {
-      const response = await fetch("/users/check/" + button.dataset.id);
-      const { exists } = await response.json();
-      if (exists) {
-        button.style.display = "none";
-        const openButton = button.previousElementSibling;
-        openButton.style.display = "inline-block";
-      } else {
-        const formData = new FormData();
-        formData.append("name", user.name);
-        formData.append("email", user.email);
-        formData.append("phone", user.phone);
-        formData.append("website", user.website);
-        formData.append("city", user.city);
-        formData.append("company", user.company.name);
-        fetch("/users/add", { method: "POST", body: formData });
-      }
-    });
-  });
-  const openButtons = document.querySelectorAll(".open");
-  openButtons.forEach((button) => {
-    button.addEventListener("click", () => {
-      const userId = button.dataset.id;
-      window.location.href = `/users/${userId}`;
-    });
+document.addEventListener("DOMContentLoaded", () => {
+  const allUsersBtn = document.getElementById("allUsersBtn");
+  const usersList = document.getElementById("usersList");
+
+  allUsersBtn.addEventListener("click", () => {
+    fetch("https://jsonplaceholder.typicode.com/users")
+      .then((response) => response.json())
+      .then((data) => {
+        usersList.innerHTML = "";
+        data.forEach((user) => {
+          const userDiv = document.createElement("div");
+          userDiv.classList.add("user");
+          userDiv.innerHTML = `
+                        <p><strong>Name:</strong> ${user.name}</p>
+                        <p><strong>Email:</strong> ${user.email}</p>
+                        <p><strong>Phone:</strong> ${user.phone}</p>
+                        <p><strong>Website:</strong> ${user.website}</p>
+                        <p><strong>City:</strong> ${user.address.city}</p>
+                        <p><strong>Company:</strong> ${user.company.name}</p>
+                        <button class="addBtn">Add</button>
+                        <button class="openBtn" style="display:none;">Open</button>
+                    `;
+          usersList.appendChild(userDiv);
+
+          const addBtn = userDiv.querySelector(".addBtn");
+          const openBtn = userDiv.querySelector(".openBtn");
+
+          fetch(`http://localhost:3000/users/fetchUserByEmail/${user.email}`)
+            .then((response) => response.json())
+            .then((userData) => {
+              if (userData) {
+                addBtn.style.display = "none";
+                openBtn.style.display = "block";
+              }
+            })
+            .catch((error) => console.error("Error fetching user:", error));
+
+          addBtn.addEventListener("click", () => {
+            const requestBody = {
+              name: user.name,
+              email: user.email,
+              phone: user.phone,
+              website: user.website,
+              city: user.address.city,
+              company: user.company.name,
+            };
+            fetch("http://localhost:3000/users/addUser", {
+              method: "POST",
+              headers: {
+                "Content-Type": "application/json",
+              },
+              body: JSON.stringify(requestBody),
+            })
+              .then((response) => {
+                if (!response.ok) {
+                  throw new Error("Failed to add user");
+                }
+                addBtn.style.display = "none";
+                openBtn.style.display = "block";
+              })
+              .catch((error) => {
+                console.error("Error adding user:", error);
+              });
+          });
+
+          openBtn.addEventListener("click", () => {
+            window.location.href = `post.html?userId=${user.id}`;
+          });
+        });
+      })
+      .catch((error) => console.error("Error fetching users:", error));
   });
 });
