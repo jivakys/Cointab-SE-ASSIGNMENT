@@ -1,50 +1,19 @@
-const db = require("../DB");
-const axios = require("axios");
+const { DataTypes } = require("sequelize");
+const sequelize = require("../database/db");
 
-class Post {
-  constructor(id, userId, title, body) {
-    this.id = id;
-    this.userId = userId;
-    this.title = title;
-    this.body = body;
-  }
-
-  static async getAllPosts(userId) {
-    const response = await axios.get(
-      `https://jsonplaceholder.typicode.com/posts?userId=${userId}`
-    );
-    return response.data;
-  }
-
-  static async addPost(post) {
-    const query = "INSERT INTO posts SET ?";
-    return new Promise((resolve, reject) => {
-      db.query(query, post, (err, result) => {
-        if (err) reject(err);
-        resolve(result);
-      });
-    });
-  }
-
-  static async checkPost(id) {
-    const query = "SELECT * FROM posts WHERE id = ?";
-    return new Promise((resolve, reject) => {
-      db.query(query, id, (err, result) => {
-        if (err) reject(err);
-        resolve(result.length > 0);
-      });
-    });
-  }
-
-  static async getPost(id) {
-    const query = "SELECT * FROM posts WHERE id = ?";
-    return new Promise((resolve, reject) => {
-      db.query(query, id, (err, result) => {
-        if (err) reject(err);
-        resolve(result[0]);
-      });
-    });
-  }
-}
+const Post = sequelize.define("Post", {
+  userId: {
+    type: DataTypes.INTEGER,
+    allowNull: false,
+  },
+  title: {
+    type: DataTypes.STRING,
+    allowNull: false,
+  },
+  body: {
+    type: DataTypes.TEXT,
+    allowNull: false,
+  },
+});
 
 module.exports = Post;

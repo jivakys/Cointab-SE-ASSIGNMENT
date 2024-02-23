@@ -1,0 +1,9 @@
+{
+  "development": {
+    "username": "root",
+    "password": "Jivakys345#",
+    "database": "cointab",
+    "host": "localhost",
+    "dialect": "mysql"
+  }
+}

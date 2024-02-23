@@ -1,34 +1,64 @@
-const express = require("express");
-const router = express.Router();
-const User = require("../MODELS");
+const axios = require("axios");
+const User = require("../models/user");
 
-router.get("/", async (req, res) => {
-  const users = await User.getAllUsers();
-  res.render("home", { users });
-});
+const fetchAllUsers = async (req, res) => {
+  try {
+    const response = await axios.get(
+      "https://jsonplaceholder.typicode.com/users"
+    );
+    const users = response.data;
 
-router.post("/add", async (req, res) => {
-  const user = new User(
-    null,
-    req.body.name,
-    req.body.email,
-    req.body.phone,
-    req.body.website,
-    req.body.city,
-    req.body.company
-  );
-  await User.addUser(user);
-  res.redirect("/");
-});
+    const existingUsers = await User.findAll();
+    if (existingUsers.length === 0) {
+      await User.bulkCreate(users);
+    }
+    res.json({ users: existingUsers });
+  } catch (error) {
+    console.error("Error fetching users:", error);
+    res.status(500).json({ error: "Internal server error." });
+  }
+};
 
-router.get("/check/:id", async (req, res) => {
-  const exists = await User.checkUser(req.params.id);
-  res.json({ exists });
-});
+const fetchUserById = async (req, res) => {
+  try {
+    const userId = req.params.id;
+    const user = await User.findByPk(userId);
+    res.json(user);
+  } catch (error) {
+    console.error("Error fetching user by ID:", error);
+    res.status(500).json({ error: "Internal server error." });
+  }
+};
 
-router.get("/:id", async (req, res) => {
-  const user = await User.getUser(req.params.id);
-  res.render("post", { user });
-});
+const fetchUserByEmail = async (req, res) => {
+  try {
+    const userEmail = req.params.email;
+    const user = await User.findOne({ where: { email: userEmail } });
+    res.json(user);
+  } catch (error) {
+    console.error("Error fetching user by email:", error);
+    res.status(500).json({ error: "Internal server error." });
+  }
+};
 
-module.exports = router;
+const addUser = async (req, res) => {
+  try {
+    const user = req.body;
+    console.log(user);
+    const existingUser = await User.findOne({ where: { email: user.email } });
+
+    if (existingUser) {
+      console.log("User already exists.");
+      res.json({ message: "User already exists.", showOpenButton: true });
+    } else {
+      await User.create(user);
+      res.json({ message: "User added successfully.", showOpenButton: true });
+      console.log("User added.");
+    }
+  } catch (error) {
+    console.error("Error adding user:", error);
+    res.status(500).json({ error: "Internal server error.", error });
+  }
+};
+
+module.exports = { fetchAllUsers, fetchUserById, fetchUserByEmail, addUser };

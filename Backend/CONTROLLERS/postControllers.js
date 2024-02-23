@@ -1,26 +1,52 @@
-const express = require("express");
-const router = express.Router();
-const Post = require("../MODELS/postModel");
+const axios = require("axios");
+const Post = require("../models/post");
 
-router.get("/:id", async (req, res) => {
-  const posts = await Post.getAllPosts(req.params.id);
-  res.json({ posts });
-});
+const fetchPosts = async (req, res) => {
+  const userId = req.params.userId;
+  try {
+    const response = await axios.get(
+      `https://jsonplaceholder.typicode.com/posts?userId=${userId}`
+    );
+    const posts = response.data;
+    await Post.bulkCreate(posts);
+    res.json({ message: "Posts fetched and stored successfully." });
+  } catch (error) {
+    console.error("Error fetching posts:", error);
+    res.status(500).json({ error: "Internal server error." });
+  }
+};
 
-router.post("/:id/add", async (req, res) => {
-  const post = new Post(null, req.params.id, req.body.title, req.body.body);
-  await Post.addPost(post);
-  res.redirect(`/users/${req.params.id}`);
-});
+const bulkAddPosts = async (req, res) => {
+  const userId = req.params.userId;
+  try {
+    const response = await axios.get(
+      `https://jsonplaceholder.typicode.com/posts?userId=${userId}`
+    );
+    const postsData = response.data;
 
-router.get("/:id/check/:postId", async (req, res) => {
-  const exists = await Post.checkPost(req.params.postId);
-  res.json({ exists });
-});
+    const existingPosts = await Post.findAll({ where: { userId: userId } });
 
-router.get("/:id/post/:postId", async (req, res) => {
-  const post = await Post.getPost(req.params.postId);
-  res.render("post", { post });
-});
+    if (existingPosts.length === 0) {
+      await Post.bulkCreate(postsData);
+      res.json({ message: "Posts bulk added successfully." });
+    } else {
+      res.json({ message: "Posts already exist in the database." });
+    }
+  } catch (error) {
+    console.error("Error adding posts:", error);
+    res.status(500).json({ error: "Internal server error." });
+  }
+};
 
-module.exports = router;
+const downloadPostsInExcel = async (req, res) => {
+  const userId = req.params.userId;
+  try {
+    const posts = await Post.findAll({ where: { userId: userId } });
+    res.json({ message: "Download initiated." });
+  } catch (error) {
+    console.error("Error downloading posts:", error);
+    res.status(500).json({ error: "Internal server error." });
+  }
+};
+
+module.exports = { fetchPosts, bulkAddPosts, downloadPostsInExcel };
