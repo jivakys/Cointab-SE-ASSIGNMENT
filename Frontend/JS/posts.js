@@ -30,13 +30,16 @@ document.addEventListener("DOMContentLoaded", () => {
     .catch((error) => console.error("Error fetching posts:", error));
 
   bulkAddBtn.addEventListener("click", () => {
-    fetch(`http://localhost:3456/posts/bulkAddPosts/${userId}`, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({}),
-    })
+    fetch(
+      `https://cointab-backend-production-e732.up.railway.app/posts/bulkAddPosts/${userId}`,
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({}),
+      }
+    )
       .then((response) => {
         if (!response.ok) {
           throw new Error("Failed to bulk add posts");

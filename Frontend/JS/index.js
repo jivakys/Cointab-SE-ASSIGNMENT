@@ -25,7 +25,9 @@ document.addEventListener("DOMContentLoaded", () => {
           const addBtn = userDiv.querySelector(".addBtn");
           const openBtn = userDiv.querySelector(".openBtn");
 
-          fetch(`http://localhost:3456/users/fetchUserByEmail/${user.email}`)
+          fetch(
+            `https://cointab-backend-production-e732.up.railway.app/users/fetchUserByEmail/${user.email}`
+          )
             .then((response) => response.json())
             .then((userData) => {
               if (userData) {
@@ -44,13 +46,16 @@ document.addEventListener("DOMContentLoaded", () => {
               city: user.address.city,
               company: user.company.name,
             };
-            fetch("http://localhost:3456/users/addUser", {
-              method: "POST",
-              headers: {
-                "Content-Type": "application/json",
-              },
-              body: JSON.stringify(requestBody),
-            })
+            fetch(
+              "https://cointab-backend-production-e732.up.railway.app/users/addUser",
+              {
+                method: "POST",
+                headers: {
+                  "Content-Type": "application/json",
+                },
+                body: JSON.stringify(requestBody),
+              }
+            )
               .then((response) => {
                 if (!response.ok) {
                   throw new Error("Failed to add user");
