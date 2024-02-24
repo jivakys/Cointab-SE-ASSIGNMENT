@@ -49,4 +49,4 @@ The application features two main pages:
 Deployed Link
 View the deployed application
 backend-railway link = https://cointab-backend-production-e732.up.railway.app/
-frontend netlify link =
+frontend netlify link = https://65d9342bb91d7c7d80a1dd62--venerable-palmier-a34d49.netlify.app/
