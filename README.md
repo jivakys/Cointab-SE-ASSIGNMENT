@@ -16,7 +16,6 @@ The application features two main pages:
 
 ## Installation
 
-
 ### Clone this Project
 
 ```
@@ -35,8 +34,9 @@ npm run start
 
 ### Swagger API Documentation
 
-```[API Check here](http://localhost:3456/apidocs/)```
+[API Check here](http://localhost:3456/apidocs/)
 
+```
    Home Page:
    Click on the "All Users" button to fetch user data from the external API.
    Click on the "Add" button to add a user to the database.
