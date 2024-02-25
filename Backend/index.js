@@ -52,7 +52,7 @@ const options = {
   apis: ["./routes/*.js"],
 };
 const swaggerSpec = swaggerJSDoc(options);
-app.use("/apidoc", swaggerUi.serve, swaggerUi.setup(swaggerSpec));
+app.use("/apidocs", swaggerUi.serve, swaggerUi.setup(swaggerSpec));
 
 app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}`);
