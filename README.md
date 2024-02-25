@@ -1,7 +1,5 @@
 # Cointab-Assignment
 
-## Overview
-
 Cointab SE Assignment is a web application demonstrating fetching user data from an external API, displaying it on the home page, and providing functionalities to interact with the data.
 
 ## Technologies Used
@@ -46,7 +44,7 @@ The application features two main pages:
    This project utilizes the JSONPlaceholder API for fetching user and post data.
    ```
 
-Deployed Link
+##Deployed Link
 View the deployed application
-backend-railway link = https://cointab-backend-production-e732.up.railway.app/
-frontend netlify link = https://65d9342bb91d7c7d80a1dd62--venerable-palmier-a34d49.netlify.app/
+### backend-railway link : https://cointab-backend-production-e732.up.railway.app/
+### frontend netlify link : https://65d9342bb91d7c7d80a1dd62--venerable-palmier-a34d49.netlify.app/
