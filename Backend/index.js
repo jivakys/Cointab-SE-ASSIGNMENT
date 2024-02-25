@@ -24,7 +24,7 @@ sequelize
 
 const PORT = process.env.PORT || 3000;
 
-//Swagger Documentation
+//Swagger Documentation api
 const swaggerJSDoc = require("swagger-jsdoc");
 const swaggerUi = require("swagger-ui-express");
 const options = {
