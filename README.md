@@ -16,26 +16,6 @@ The application features two main pages:
 - Home Page: Displays essential user information fetched from an external API. Users can add users to the database and navigate to a post page.
 - Post Page: Displays posts associated with a specific user fetched from an external API. Users can add posts to the database in bulk and download posts in Excel format.
 
-### Clone this Project
-
-```
-https://github.com/jivakys/FitnessHub-GymApp
-```
-
-### Run Server
-
-```javascript
-npm nodemon index.js
-```
-
-### Runs the project in the development mode
-
-[http://localhost:3456](http://localhost:3456)
-
-### Swagger API Documentation
-
-[API Check here](http://localhost:3456/apidocs/)
-
 ## Installation
 
 1. Clone the repository:
