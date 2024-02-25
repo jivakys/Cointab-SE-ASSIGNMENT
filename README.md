@@ -16,22 +16,27 @@ The application features two main pages:
 
 ## Installation
 
-1. Clone the repository:
-   ```bash
-   git clone <repository_url>
-   Navigate to the project directory:
-   bash
-   Copy code
-   cd cointab-se-assignment
-   Install dependencies:
-   bash
-   Copy code
-   npm install
-   Start the backend server:
-   bash
-   Copy code
-   npm start
-   Usage
+
+### Clone this Project
+
+```
+https://github.com/jivakys/Cointab-SE-ASSIGNMENT
+```
+
+### Run Server
+
+```javascript
+npm nodemon index.js
+```
+
+### Runs the project in the development mode
+
+[http://localhost:3456](http://localhost:3456)
+
+### Swagger API Documentation
+
+[API Check here](http://localhost:3456/apidocs/)
+
    Home Page:
    Click on the "All Users" button to fetch user data from the external API.
    Click on the "Add" button to add a user to the database.
@@ -45,6 +50,5 @@ The application features two main pages:
    ```
 
 ##Deployed Link
-View the deployed application
 ### backend-railway link : https://cointab-backend-production-e732.up.railway.app/
 ### frontend netlify link : https://65d9342bb91d7c7d80a1dd62--venerable-palmier-a34d49.netlify.app/
