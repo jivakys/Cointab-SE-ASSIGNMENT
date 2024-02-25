@@ -22,7 +22,7 @@
  *           type: string
  *           description: The user phone
  *         website:
- *           type: number
+ *           type: string
  *           description: The user website
  *         city:
  *           type: string
