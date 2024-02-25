@@ -76,7 +76,7 @@
  * /users//fetchUserById/:id:
  *   get:
  *       summary: To retrieve information about one perticular users who are in the database.
- *       tags: [Users]
+ *       tags: [User]
  *       responses:
  *           200:
  *               description: Single user data has been successfully retrieved.
