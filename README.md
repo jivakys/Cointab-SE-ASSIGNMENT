@@ -26,16 +26,16 @@ https://github.com/jivakys/Cointab-SE-ASSIGNMENT
 ### Run Server
 
 ```javascript
-npm nodemon index.js
+npm run start
 ```
 
 ### Runs the project in the development mode
 
-[http://localhost:3456](http://localhost:3456)
+```[http://localhost:3456](http://localhost:3456)```
 
 ### Swagger API Documentation
 
-[API Check here](http://localhost:3456/apidocs/)
+```[API Check here](http://localhost:3456/apidocs/)```
 
    Home Page:
    Click on the "All Users" button to fetch user data from the external API.
@@ -50,5 +50,6 @@ npm nodemon index.js
    ```
 
 ##Deployed Link
+
 ### backend-railway link : https://cointab-backend-production-e732.up.railway.app/
 ### frontend netlify link : https://65d9342bb91d7c7d80a1dd62--venerable-palmier-a34d49.netlify.app/
