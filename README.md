@@ -49,8 +49,8 @@ npm run start
    This project utilizes the JSONPlaceholder API for fetching user and post data.
 ```
 
-##Deployed Link
+### Deployed Link:
 
-### backend-railway link : https://cointab-backend-production-e732.up.railway.app/
+ backend-railway link : https://cointab-backend-production-e732.up.railway.app/
 
-### frontend netlify link : https://loquacious-clafoutis-0fe07c.netlify.app/
+ frontend netlify link : https://loquacious-clafoutis-0fe07c.netlify.app/
