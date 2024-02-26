@@ -36,7 +36,15 @@ npm run start
 
 [API Check here](http://localhost:3456/apidocs/)
 
-```
+
+### Deployed Link:
+
+ backend-railway link : https://cointab-backend-production-e732.up.railway.app/
+
+ frontend netlify link : https://loquacious-clafoutis-0fe07c.netlify.app/
+
+ ### About Application
+ ```
    Home Page:
    Click on the "All Users" button to fetch user data from the external API.
    Click on the "Add" button to add a user to the database.
@@ -48,9 +56,3 @@ npm run start
    Credits
    This project utilizes the JSONPlaceholder API for fetching user and post data.
 ```
-
-### Deployed Link:
-
- backend-railway link : https://cointab-backend-production-e732.up.railway.app/
-
- frontend netlify link : https://loquacious-clafoutis-0fe07c.netlify.app/
