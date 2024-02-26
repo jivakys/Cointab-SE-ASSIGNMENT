@@ -45,6 +45,7 @@ document.addEventListener("DOMContentLoaded", () => {
           throw new Error("Failed to bulk add posts");
         }
         bulkAddBtn.style.display = "none";
+        alert("Post data added to Database");
         downloadExcelBtn.style.display = "block";
       })
       .catch((error) => {

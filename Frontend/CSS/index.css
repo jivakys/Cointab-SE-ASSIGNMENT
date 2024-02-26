@@ -26,9 +26,25 @@ button {
 button:hover {
   background-color: #a1cbf8;
 }
-
+.addBtn {
+  font-family: "Roboto", sans-serif;
+  font-size: 20px;
+  padding: 5px 10px;
+  cursor: pointer;
+  background-color: #7ed77c;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+}
 .openBtn {
   display: none;
+  font-family: "Roboto", sans-serif;
+  font-size: 20px;
+  padding: 5px 10px;
+  cursor: pointer;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
 }
 
 h1 {
@@ -44,7 +60,7 @@ h1 {
 #usersList {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
-  gap: 20px;
+  gap: 5px;
   margin-top: 15px;
 }
 
