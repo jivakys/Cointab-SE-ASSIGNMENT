@@ -30,9 +30,9 @@ npm run start
 
 ### Runs the project in the development mode
 
-```[http://localhost:3456](http://localhost:3456)```
+`[http://localhost:3456](http://localhost:3456)`
 
-### Swagger API Documentation
+## Swagger API Documentation
 
 [API Check here](http://localhost:3456/apidocs/)
 
@@ -47,9 +47,10 @@ npm run start
    Click on the "Download in Excel" button to download posts in Excel format.
    Credits
    This project utilizes the JSONPlaceholder API for fetching user and post data.
-   ```
+```
 
 ##Deployed Link
 
 ### backend-railway link : https://cointab-backend-production-e732.up.railway.app/
-### frontend netlify link : https://65d9342bb91d7c7d80a1dd62--venerable-palmier-a34d49.netlify.app/
+
+### frontend netlify link : https://loquacious-clafoutis-0fe07c.netlify.app/
