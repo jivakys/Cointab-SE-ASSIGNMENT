@@ -30,7 +30,7 @@ npm run start
 
 ### Runs the project in the development mode
 
-`[http://localhost:3456](http://localhost:3456)`
+[http://localhost:3456](http://localhost:3456)
 
 ## Swagger API Documentation
 
